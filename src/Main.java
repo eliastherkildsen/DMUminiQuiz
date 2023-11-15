@@ -10,20 +10,28 @@ public class Main {
 
         // create array to track points and questions asked.
 
-        int numberOfRounds = 3;
+        int numberOfRounds;
         int numberOfPlayers = setup();
         int Roundcount = 0;
 
+        // prompt player to pick number of rounds
+        numberOfRounds = getUserInputInt("Pick the number of rounds you want to play");
+
         do {
             // picks player.
-            int player = Roundcount % numberOfPlayers;
+            int player = Roundcount % (numberOfPlayers);
             // present question to player
             presentQuestion(player);
 
             Roundcount++;
 
-        }while (Roundcount < numberOfPlayers + 1 * numberOfRounds);
-        System.out.println(Arrays.toString(points));
+        }while (Roundcount < (numberOfPlayers) * numberOfRounds);
+
+        // print results
+        for (int i = 0; i < points.length; i++) {
+            System.out.printf("%splayer %d %s has %d points! %n", ANSI_YELLOW, i + 1, ANSI_RESET, points[i]);
+        }
+
 
     }
 
@@ -35,7 +43,7 @@ public class Main {
         // stores question.
         String question = questions.Prompts[questionIndex];
         // prints question.
-        String prompt = String.format("question til spiller %d %n %s enter true/false", player + 1, question);
+        String prompt = String.format("%s question til spiller %d%s %n %s enter true/false", ANSI_YELLOW, player +1, ANSI_RESET , question);
         // prompts user to answer question .
         boolean userInput = getUserInputBool(prompt);
 
@@ -147,5 +155,6 @@ public class Main {
 
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_YELLOW = "\u001B[33m";
 
 }
