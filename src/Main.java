@@ -8,10 +8,11 @@ public class Main {
 
     public static void main(String[] args) {
 
-        // create array to track points and questions asked.
+
 
         int numberOfRounds;
-        int numberOfPlayers = setup();
+        // select number of players
+        int numberOfPlayers = setup();  // also create array to track points and questions asked.
         int Roundcount = 0;
 
         // prompt player to pick number of rounds
@@ -27,7 +28,7 @@ public class Main {
 
         }while (Roundcount < (numberOfPlayers) * numberOfRounds);
 
-        // print results
+        // print results after game end.
         for (int i = 0; i < points.length; i++) {
             System.out.printf("%splayer %d %s has %d points! %n", ANSI_YELLOW, i + 1, ANSI_RESET, points[i]);
         }
@@ -47,6 +48,7 @@ public class Main {
         // prompts user to answer question .
         boolean userInput = getUserInputBool(prompt);
 
+        // adds point if question answer is correct, and prompts answer result ex. true/false
         if (userInput == answer){
             points[player] += 1;
             System.out.println("correct!");
@@ -104,9 +106,13 @@ public class Main {
 
 
     public static int pickNumberOfPlayer() {
+        // create prompt.
         String prompt = "Enter the total amount of players: (1-4)";
+        // store input
         int numberOfPlayers = getUserInputInt(prompt);
+        // prompt player
         System.out.printf("%nYou have selected %d players.%n", numberOfPlayers);
+        // return the number of players.
         return numberOfPlayers;
     }
     
@@ -141,7 +147,7 @@ public class Main {
             // prompt user
             System.out.println(prompt);
 
-            //  checks if input is a number.
+            //  checks if input is a number and returns if true.
             if (scanner.hasNextBoolean()) {
                 return scanner.nextBoolean();
             }
@@ -152,7 +158,7 @@ public class Main {
         }while (true);
     }
 
-
+    // colors!
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_RED = "\u001B[31m";
     public static final String ANSI_YELLOW = "\u001B[33m";
